@@ -1,0 +1,33 @@
+pipeline {
+    agent any
+    stages {
+        stage('Example') {
+            steps {
+                 git branch: 'master', credentialsId: '1', url: 'git@github.com:Shivamojha-007/employee-system.git'
+            }
+        }
+    }
+}    
+
+node {
+  def remote = [:]
+  remote.name = 'azureuser'
+  remote.host = '20.186.116.214'
+  remote.user = 'azureuser'
+  remote.password = 'Password@123'
+  remote.allowAnyHosts = true
+  stage('Remote SSH') {
+      
+    sshCommand remote: remote, command: "sudo apt-get install apache2"  
+    sshCommand remote: remote, command: "sudo apt install mysql-server"
+    sshCommand remote: remote, command: "sudo apt-get install php7.4"
+    sshCommand remote: remote, command: "ls -lrt"
+    sshCommand remote: remote, command: "ls /var/www/html/employee"
+  //  sshCommand remote: remote, command: "for i in {1..5}; do echo -n \"Loop \$i \"; date ; sleep 1; done"
+  }
+  
+}
+
+
+
+
