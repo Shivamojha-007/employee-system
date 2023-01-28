@@ -1,6 +1,6 @@
 <?php
 
-$conn=mysqli_connect('localhost','shivam123','Shivam@21','test1');
+$conn=mysqli_connect('localhost','shivam123','Shivam@21','test');
 
 
 ?>
